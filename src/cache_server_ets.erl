@@ -1,7 +1,7 @@
 -module(cache_server_ets).
 
 %% API
--export([create/0, destroy/1]).
+-export([create/0]).
 -export([insert/3, lookup/1, lookup_by_date/2]).
 -export([delete_obsolete/0]).
 
@@ -9,10 +9,6 @@
 create() ->
 
     ets:new(cache, [public, named_table, {write_concurrency, true}]).
-
-destroy(cache) ->
-    true = ets:delete(cache),
-    ok.
 
 insert(Key, Value, LiveTime) ->
 	case is_integer(LiveTime) of
